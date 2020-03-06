@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ch">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>
+    LeetCode 57-II 和为S的连续正整数序列题解    | ZZZXXXCCCWXY999的个人博客
+  </title>
+  <meta name="description" content="ZZZXXXCCCWXY999的个人博客，佛系写博客">
+  
+  <meta name="keywords" content="
+  
+  ">
+  
+  <meta name="author" content="ZZZXXXCCCWXY999">
+
+  <meta http-equiv="Cache-Control" content="no-transform"/>
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="theme-color" content="#1e2327">
+  <link rel="apple-touch-icon" href="https://github.githubassets.com/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://github.githubassets.com/apple-touch-icon-180x180.png">
+
+  <link rel="icon" type="image/x-icon" href="https://github.githubassets.com/favicon.ico">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+
+  
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.25-csp/vue.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body id="replica-app">
+
+<nav class="navbar-wrapper">
+  <div class="navbar">
+    <div class="container clearfix">
+      <a href="/" class="navbar-logo"><i class="fa fa-github"></i></a>
+
+      <div class="navbar-search float-left desktop-only">
+        <div class="navbar-search-form">
+          <label for="gsc-i-id1">This website</label>
+          <div id="google-search">
+            <gcse:search></gcse:search>
+          </div>
+        </div>
+      </div>
+
+      <ul class="navbar-nav float-left">
+        
+        <li><a href="/archives">Archives</a></li>
+        
+        
+        <li><a href="/categories">Categories</a></li>
+        
+        
+        <li><a href="/tags">Tags</a></li>
+        
+        
+        <li class="desktop-only"><a href="/atom.xml" target="_blank">RSS</a></li>
+        
+      </ul>
+
+      <ul class="navbar-nav user-nav float-right desktop-only">
+        <li class="user-nav-notification">
+          <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
+        </li>
+        <li>
+          <a><i class="fa fa-plus"></i> <i class="fa fa-caret-down"></i></a>
+        </li>
+        <li class="user-nav-logo">
+          <a><img src="https://octodex.github.com/images/baracktocat.jpg"> <i class="fa fa-caret-down"></i></i></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="main-container">
+  <header class="header-wrapper desktop-only">
+  <div class="container header-site-detail">
+    <ul class="header-toolbar">
+      <li class="clearfix">
+        <a href="/archives" class="header-toolbar-left"><i
+                  class="fa fa-file-text"></i> Posts </a>
+        <a href="/archives"
+           class="header-toolbar-right"> 2 </a>
+      </li>
+      <li>
+        <a href="/tags" class="header-toolbar-left"><i
+                  class="fa fa-tags"></i> Tags </a>
+        <a href="/tags"
+           class="header-toolbar-right"> 0 </a>
+      </li>
+      <li>
+        <a href="/categories" class="header-toolbar-left"><i
+                  class="fa fa-folder-open"></i> Categories </a>
+        <a href="/categories"
+           class="header-toolbar-right"> 0 </a>
+      </li>
+    </ul>
+    <h2 class="header-title">
+      <i class="fa fa-book text-muted"></i>
+      <a href="/">ZZZXXXCCCWXY999的个人博客</a>
+      
+      
+    </h2>
+  </div>
+
+  <div class="container">
+    <div class="header-tab-wrapper clearfix">
+      <span class="header-tab header-tab-selected"><i class="fa fa-thumbs-o-up"></i> Like</span>
+      <span class="header-tab"><i class="fa fa-share-alt"></i> Share</span>
+      <span class="header-tab"><i class="fa fa-comments-o"></i> Discussion</span>
+      <span class="header-tab"><i class="fa fa-bookmark-o"></i> Bookmark </span>
+      <span class="header-tab"><i class="fa fa-smile-o"></i> Smile <i class="fa fa-caret-down"></i></span>
+    </div>
+  </div>
+</header>
+
+
+<div class="post-container container">
+  <h3>
+    <i class="fa fa-user-o"></i>
+    ZZZXXXCCCWXY999
+
+    <span class="post-date float-right" title="{{moment(1583466563231).format('MMM DD, YYYY, h:mm:ss A')}}">
+      
+          <i class="fa fa-pencil-square-o"></i>
+      
+      {{moment(1583466563231).fromNow()}}
+    </span>
+  </h3>
+
+  <article class="post-content">
+    <h1>LeetCode 57-II 和为S的连续正整数序列题解   </h1>
+    <p align="right"> ---ZZZXXXCCCWXY999</p>
+
+<h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><p>输入一个正整数 target ，输出所有和为 target 的连续正整数序列（至少含有两个数）。</p>
+<p>序列内的数字由小到大排列，不同序列按照首个数字从小到大排列。</p>
+<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><p>示例 1：</p>
+<p>输入：target = 9<br>输出：[[2,3,4],[4,5]]<br>示例 2：</p>
+<p>输入：target = 15<br>输出：[[1,2,3,4,5],[4,5,6],[7,8]]</p>
+<h4 id="限制"><a href="#限制" class="headerlink" title="限制"></a>限制</h4><p>1 &lt;= target &lt;= 10^5</p>
+<h4 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h4><h5 id="方法一-暴力："><a href="#方法一-暴力：" class="headerlink" title="方法一 暴力："></a>方法一 暴力：</h5><p>每个正整数为起点，找到以该正整数为起点的序列和等于target，如果序列和小雨target则继续往右加，如果序列和大于target则找下一个正整数为起点。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 统计目录中所有java文件的行数的总和，注释行数总和，空行数总和，文件数总和</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> capacity = <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span>[][] ans = <span class="keyword">new</span> <span class="keyword">int</span>[capacity][];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[][] findContinuousSequence(<span class="keyword">int</span> target) &#123;</span><br><span class="line">        <span class="keyword">int</span> p = <span class="number">0</span>;<span class="comment">//用来让ans[]递增</span></span><br><span class="line">        <span class="keyword">int</span> sum = <span class="number">0</span>, limit = (target - <span class="number">1</span>) / <span class="number">2</span>; <span class="comment">// (target - 1) / 2 等效于 target / 2 下取整</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= limit; ++i) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = i; ; ++j) &#123;</span><br><span class="line">                sum += j;</span><br><span class="line">                <span class="keyword">if</span> (sum &gt; target) &#123;</span><br><span class="line">                    sum = <span class="number">0</span>;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (sum == target) &#123;</span><br><span class="line">                    <span class="keyword">int</span> q = <span class="number">0</span>;<span class="comment">//用来让res[]递增</span></span><br><span class="line">                    <span class="keyword">int</span>[] res = <span class="keyword">new</span> <span class="keyword">int</span>[j - i + <span class="number">1</span>];</span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">int</span> k = i; k &lt;= j; ++k) &#123;</span><br><span class="line">                        res[q++] = k;</span><br><span class="line">                    &#125;</span><br><span class="line">                    ans[p++] = res;</span><br><span class="line">                    <span class="comment">//如果ans[]的空间满了，我们需要给它扩容空间，哈皮题目要求的返回int[][]我们也没办法。。。</span></span><br><span class="line">                    <span class="keyword">if</span> (p == capacity) &#123;</span><br><span class="line">                        enlargeCapacity();</span><br><span class="line">                    &#125;</span><br><span class="line">                    sum = <span class="number">0</span>;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        changeCapacity(p);</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 扩容空间</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">enlargeCapacity</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        capacity += <span class="number">10</span>;</span><br><span class="line">        ans = Arrays.copyOf(ans, capacity);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 删除数组多余空间</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">changeCapacity</span><span class="params">(<span class="keyword">int</span> retCapacity)</span> </span>&#123;</span><br><span class="line">        ans = Arrays.copyOf(ans, retCapacity);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>#####方法二 双指针：</p>
+<p>我们发现上面的方法非常麻烦时间复杂度和很高，而且求和也非常的笨。。。因为我们有数学公式可以用来求和sum = (l + r) * (r - l + 1) / 2 ，l和r分别表示序列两端的数。这样我们只需要知道l和r就可以算出来他的序列。我们对方法一进行一些优化：</p>
+<p>1.不需要每次都重新求和一遍，只需要知道l和r就能求和，如果sum&lt;target我们就让r++，如果sum&gt;target我们就让l++，如果sum==target我们把他加入到数组中。</p>
+<p>2.由于题目要求每个序列至少含有两个数，所以我们只需要保证l&lt;r就可以。</p>
+<p>3.上代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> xyz.zxcwxy999.LeetCode.interview57II;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> capacity = <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">int</span>[][] ans = <span class="keyword">new</span> <span class="keyword">int</span>[capacity][];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[][] findContinuousSequence(<span class="keyword">int</span> target) &#123;</span><br><span class="line">        <span class="keyword">int</span> l = <span class="number">1</span>; <span class="comment">//让l初始化为1，r初始化为2</span></span><br><span class="line">        <span class="keyword">int</span> r = <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">int</span> p = <span class="number">0</span>; <span class="comment">//用来让ans[]递增</span></span><br><span class="line">        <span class="keyword">int</span> sum = (l + r) * (r - l + <span class="number">1</span>) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">while</span> (l &lt; r) &#123;</span><br><span class="line">            <span class="keyword">if</span> ((l + r) * (r - l + <span class="number">1</span>) / <span class="number">2</span> &lt; target) &#123;</span><br><span class="line">                r++;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> ((l + r) * (r - l + <span class="number">1</span>) / <span class="number">2</span> &gt; target) &#123;</span><br><span class="line">                l++;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">int</span> q = <span class="number">0</span>;<span class="comment">//用来让res[]递增</span></span><br><span class="line">                <span class="keyword">int</span>[] res = <span class="keyword">new</span> <span class="keyword">int</span>[r - l + <span class="number">1</span>];</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i = l; i &lt;= r; i++) &#123;</span><br><span class="line">                    res[q++] = i;</span><br><span class="line">                &#125;</span><br><span class="line">                ans[p++] = res;</span><br><span class="line">                <span class="keyword">if</span> (p == capacity) &#123;</span><br><span class="line">                    enlargeCapacity();</span><br><span class="line">                &#125;</span><br><span class="line">                l++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        changeCapacity(p);</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 扩容空间</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">enlargeCapacity</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        capacity += <span class="number">10</span>;</span><br><span class="line">        ans = Arrays.copyOf(ans, capacity);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 删除数组多余空间</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">changeCapacity</span><span class="params">(<span class="keyword">int</span> retCapacity)</span> </span>&#123;</span><br><span class="line">        ans = Arrays.copyOf(ans, retCapacity);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>#####方法三 数学方法：</p>
+<p>首先，我们没必要从1一直判断到target-1。我们只需要判断到target/2即可</p>
+<p>其次，我们有了求和公式：(l + r) * (r - l + 1) / 2，我们可以令它等于target</p>
+<p>(l + r) * (r - l + 1) / 2=targe</p>
+<p>r^2+r-l^2+l-2*target=0</p>
+<p>有点难看。。。。。。。变成x和y吧，，，，，y^2+y-x^2+x-2*target=0</p>
+<p>解关于y的二元一次方程</p>
+<p>a=1,b=1,c=-x^2+x-2*target</p>
+<p>结合题目情况考虑，x和y的解为整数，判别式为整数，求根公式也为整数（2a分之-b加减根号下b^2-4ac）因为a=1，所以我们只需要要求-b加减根号下b^2-4ac为偶数。。。</p>
+<p>上代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> java.lang.Math.sqrt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> capacity = <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span>[][] ans = <span class="keyword">new</span> <span class="keyword">int</span>[capacity][];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[][] findContinuousSequence(<span class="keyword">int</span> target) &#123;</span><br><span class="line">        <span class="keyword">int</span> p = <span class="number">0</span>; <span class="comment">//用来让ans[]递增</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> x = <span class="number">1</span>; x &lt;= (target - <span class="number">1</span>) / <span class="number">2</span>; ++x) &#123;</span><br><span class="line">            <span class="keyword">long</span> delta = <span class="number">1</span> - <span class="number">4</span> * (-(<span class="keyword">long</span>) x * (<span class="keyword">long</span>) x +x - <span class="number">2</span> * target); <span class="comment">//判别式b^2-4ac</span></span><br><span class="line">            <span class="keyword">if</span> (delta &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">int</span> delta_sqrt = (<span class="keyword">int</span>) sqrt(delta + <span class="number">0.5</span>); <span class="comment">//根号下b^2-4ac，加0.5是为了四舍五入</span></span><br><span class="line">                <span class="keyword">if</span> ((<span class="keyword">long</span>) delta_sqrt * (<span class="keyword">long</span>) delta_sqrt == delta &amp;&amp; (delta_sqrt - <span class="number">1</span>) % <span class="number">2</span> == <span class="number">0</span>) &#123;<span class="comment">//前者判断是否为整数，后者判断是否分子为偶数</span></span><br><span class="line">                    <span class="keyword">int</span> y = (-<span class="number">1</span> + delta_sqrt) / <span class="number">2</span>; <span class="comment">// 另一个解(-1-delta_sqrt)/2必然小于0，不用考虑</span></span><br><span class="line">                    <span class="keyword">if</span> (x &lt; y) &#123;</span><br><span class="line">                        <span class="keyword">int</span> q = <span class="number">0</span>;<span class="comment">//用来让res[]递增</span></span><br><span class="line">                        <span class="keyword">int</span>[] res = <span class="keyword">new</span> <span class="keyword">int</span>[y - x + <span class="number">1</span>];</span><br><span class="line">                        <span class="keyword">for</span> (<span class="keyword">int</span> i = x; i &lt;= y; i++) &#123;</span><br><span class="line">                            res[q++] = i;</span><br><span class="line">                        &#125;</span><br><span class="line">                        ans[p++] = res;</span><br><span class="line">                        <span class="keyword">if</span> (p == capacity) &#123;</span><br><span class="line">                            enlargeCapacity();</span><br><span class="line">                        &#125;</span><br><span class="line"></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        changeCapacity(p);</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 扩容空间</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">enlargeCapacity</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        capacity += <span class="number">10</span>;</span><br><span class="line">        ans = Arrays.copyOf(ans, capacity);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 删除数组多余空间</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">changeCapacity</span><span class="params">(<span class="keyword">int</span> retCapacity)</span> </span>&#123;</span><br><span class="line">        ans = Arrays.copyOf(ans, retCapacity);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  </article>
+</div>
+
+
+    
+
+
+
+
+</div>
+
+<div class="footer-wrapper container">
+  <footer class="footer clearfix">
+    <div class="clearfix">
+    <a href="https://zzzxxxccwxy999.github.io" class="footer-logo">
+      <i class="fa fa-github"></i>
+    </a>
+    <ul class="footer-social-link">
+      <li>© 2019 ZZZXXXCCCWXY999</li>
+      <li><a href="https://zzzxxxccwxy999.github.io">Home</a></li>
+      
+    </ul>
+    <div class="footer-theme-info">
+      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica" target="_blank" rel="noopener">Replica</a>
+      by <a href="//github.com/sabrinaluo" target="_blank" rel="noopener">Hiitea</a> ❤ Powered by Hexo
+    </div>
+    </div>
+    
+  </footer>
+</div>
+
+
+
+
+<script src="/js/main.js"></script>
+
+</body>
+</html>
