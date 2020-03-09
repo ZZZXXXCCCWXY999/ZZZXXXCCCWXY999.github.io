@@ -20,7 +20,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="ZZZXXXCCCWXY999的个人博客"/>
+        <meta property="og:title" content="面试题:谈谈对Spring IOC与DI的理解"/>
     
 
     <!--Open Graph Description-->
@@ -33,7 +33,7 @@
 
     <!--Type page-->
     
-        <meta property="og:type" content="website" />
+        <meta property="og:type" content="article" />
     
 
     <!--Page Cover-->
@@ -44,7 +44,7 @@
 
     <!-- Title -->
     
-    <title>归档 - ZZZXXXCCCWXY999的个人博客</title>
+    <title>面试题:谈谈对Spring IOC与DI的理解 - ZZZXXXCCCWXY999的个人博客</title>
 
     <!-- Tachyons Core CSS -->
     <link rel="stylesheet" href="https://unpkg.com/tachyons/css/tachyons.min.css">
@@ -74,8 +74,6 @@
 <body>
 
 <!-- Main Content -->
-
-
 <!-- Banner -->
 <!-- Banner -->
 <div class="w-100 bg-1 ph5-ns ph3 text-light">
@@ -128,76 +126,90 @@
     <!-- Title -->
     <div class="w-100 mw8 center vh-40 dt">
         <div class="dtc v-mid white">
-            <h1 class="f1-l f2-m tc tc-m tl-ns">归档</h1>
-            <p class="f4 fw3 pab-100px tc tc-m tl-ns"></p>
+            <h1 class="f1-l f2-m tc tc-m tl-ns">面试题:谈谈对Spring IOC与DI的理解</h1>
+            <p class="f4 fw3 pab-100px tc tc-m tl-ns">2020-03-09</p>
         </div>
     </div>
 
     <!-- Icon -->
     <div class="relative w-100 mw8 center white dn dn-m db-ns">
-        <i class="header-icon fa fa-folder-open"></i>
+        <i class="header-icon fa fa-file-text-o"></i>
     </div>
 </div>
 
+<!-- Content -->
 <div class="w-100 ph2 ph4-m ph5-l mv5 mv6-l">
     <div class="content">
         <div class="mw8 center">
-            
-                <a href="/2020/03/06/Codeforces-1248AInteger-Points%E9%A2%98%E8%A7%A3/">
-    <div class="dt w-100 hover-border-main-color pointer pa3 border-color bl mv3">
-        <div class="dtc v-mid w-20 black-50">
-            
-                <span class="f4 fw3 lh-copy">Mar 2020</span> 
-            
+            <div class="cf">
+                <div class="fl w-100 w-70-l mw7 left fw3 lh-copy pr4-ns pr0-m post-content">
+                    <!-- Tags Vertical -->
+                    
+
+                    <!-- Main Post Content -->
+                    <h1 id="框架面试题-谈谈对Spring-IOC与DI的理解"><a href="#框架面试题-谈谈对Spring-IOC与DI的理解" class="headerlink" title="框架面试题:谈谈对Spring IOC与DI的理解"></a>框架面试题:谈谈对Spring IOC与DI的理解</h1><p>IOC是一种叫做“控制反转”的设计思想。</p>
+<p>1、较浅的层次——从名字上解析<br>“控制”就是指对 对象的创建、维护、销毁等生命周期的控制，这个过程一般是由我们的程序去主动控制的，如使用new关键字去创建一个对象（创建），在使用过程中保持引用（维护），在失去全部引用后由GC去回收对象（销毁）。<br>“反转”就是指对 对象的创建、维护、销毁等生命周期的控制由程序控制改为由IOC容器控制，需要某个对象时就直接通过名字去IOC容器中获取。</p>
+<p>2、更深的层次——提到DI，依赖注入，是IOC的一种重要实现<br>一个对象的创建往往会涉及到其他对象的创建，比如一个对象A的成员变量持有着另一个对象B的引用，这就是依赖，A依赖于B。IOC机制既然负责了对象的创建，那么这个依赖关系也就必须由IOC容器负责起来。负责的方式就是DI——依赖注入，通过将依赖关系写入配置文件，然后在创建有依赖关系的对象时，由IOC容器注入依赖的对象，如在创建A时，检查到有依赖关系，IOC容器就把A依赖的对象B创建后注入到A中（组装，通过反射机制实现），然后把A返回给对象请求者，完成工作。</p>
+<p>3、IOC的意义何在？<br>IOC并没有实现更多的功能，但它的存在使我们不需要很多代码、不需要考虑对象间复杂的耦合关系就能从IOC容器中获取合适的对象，而且提供了对 对象的可靠的管理，极大地降低了开发的复杂性。</p>
+
+                    
+                    <!-- Tags Bottom -->
+                    
+
+                    <!-- Comments -->
+                    
+
+
+
+                </div>
+                <div class="fl w-100 w-30-l center fw3 lh-copy pl4-ns tl black-50">
+                    
+                    <hr class="dn-l mw4 black-50 mt5" />
+                    
+                    <!-- Widget 1: About -->
+                    <div class="mt5 mt0-l">
+    <article class="dt db-l mw8 mw8-m mw5-ns center ml0-l bg-white mv3">
+        <div class="dn dtc-m db-l v-mid tc pr4 pr0-l" style="min-width: 6rem;">
+            <img src="https://avatars0.githubusercontent.com/u/47167745?s=460&v=4" class="mb4-l br-100 h3 w3 h4-l w4-l dib" title="ZZZXXXCCCWXY999">
         </div>
-        <div class="dtc v-mid w-80 black-70">
-            <span class="f4 fw3 lh-copy">Codeforces-1248AInteger Points题解<span>
+        <div class="dtc db-l v-mid lh-copy measure center f6 black-50 tj">
+            我是ZZZXXXCCCWXY999，这是我的博客。<br>没错，看我的ID就能知道我是一个巨星。<br>我会在博客里写一些我在专业方面的分享。
         </div>
-    </div>
-</a>
-            
-                <a href="/2020/03/06/Codeforces-1248BGrow-The-Tree%E9%A2%98%E8%A7%A3/">
-    <div class="dt w-100 hover-border-main-color pointer pa3 border-color bl mv3">
-        <div class="dtc v-mid w-20 black-50">
-            
-                <span class="f4 fw3 lh-copy">Mar 2020</span> 
-            
-        </div>
-        <div class="dtc v-mid w-80 black-70">
-            <span class="f4 fw3 lh-copy">Codeforces-1248BGrow The Tree题解<span>
-        </div>
-    </div>
-</a>
-            
-                <a href="/2020/03/06/LeetCode-57-II-%E5%92%8C%E4%B8%BAS%E7%9A%84%E8%BF%9E%E7%BB%AD%E6%AD%A3%E6%95%B4%E6%95%B0%E5%BA%8F%E5%88%97%E9%A2%98%E8%A7%A3/">
-    <div class="dt w-100 hover-border-main-color pointer pa3 border-color bl mv3">
-        <div class="dtc v-mid w-20 black-50">
-            
-                <span class="f4 fw3 lh-copy">Mar 2020</span> 
-            
-        </div>
-        <div class="dtc v-mid w-80 black-70">
-            <span class="f4 fw3 lh-copy">LeetCode 57-II 和为S的连续正整数序列题解<span>
-        </div>
-    </div>
-</a>
-            
-                <a href="/2020/03/09/%E9%9D%A2%E8%AF%95%E9%A2%98-%E8%B0%88%E8%B0%88%E5%AF%B9Spring-IOC%E4%B8%8EDI%E7%9A%84%E7%90%86%E8%A7%A3/">
-    <div class="dt w-100 hover-border-main-color pointer pa3 border-color bl mv3">
-        <div class="dtc v-mid w-20 black-50">
-            
-                <span class="f4 fw3 lh-copy">Mar 2020</span> 
-            
-        </div>
-        <div class="dtc v-mid w-80 black-70">
-            <span class="f4 fw3 lh-copy">面试题:谈谈对Spring IOC与DI的理解<span>
-        </div>
-    </div>
-</a>
-            
+    </article>
+</div>
+
+                    <hr class="dn-l mw4 black-50 mt5" />
+                    
+                    <!-- Widget 2: Categories -->
+                    
+
+                    <!-- Widget 3: Recent Posts -->
+                    <div class="mt5 tc tl-l">
+    <h3>近期文章</h3>
+    
+        <p>
+            <a href="/2020/03/09/%E9%9D%A2%E8%AF%95%E9%A2%98-%E8%B0%88%E8%B0%88%E5%AF%B9Spring-IOC%E4%B8%8EDI%E7%9A%84%E7%90%86%E8%A7%A3/">面试题:谈谈对Spring IOC与DI的理解</a>
+        </p>
+    
+        <p>
+            <a href="/2020/03/06/LeetCode-57-II-%E5%92%8C%E4%B8%BAS%E7%9A%84%E8%BF%9E%E7%BB%AD%E6%AD%A3%E6%95%B4%E6%95%B0%E5%BA%8F%E5%88%97%E9%A2%98%E8%A7%A3/">LeetCode 57-II 和为S的连续正整数序列题解</a>
+        </p>
+    
+        <p>
+            <a href="/2020/03/06/Codeforces-1248BGrow-The-Tree%E9%A2%98%E8%A7%A3/">Codeforces-1248BGrow The Tree题解</a>
+        </p>
+    
+        <p>
+            <a href="/2020/03/06/Codeforces-1248AInteger-Points%E9%A2%98%E8%A7%A3/">Codeforces-1248AInteger Points题解</a>
+        </p>
+    
+</div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
 
 <!-- Footer -->
 <div class="bg-1 ph2 ph5-ns pv5">
