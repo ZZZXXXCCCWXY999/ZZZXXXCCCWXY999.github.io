@@ -20,7 +20,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="面试题:谈谈对Spring IOC与DI的理解"/>
+        <meta property="og:title" content="HashMap底层实现原理"/>
     
 
     <!--Open Graph Description-->
@@ -44,7 +44,7 @@
 
     <!-- Title -->
     
-    <title>面试题:谈谈对Spring IOC与DI的理解 - ZZZXXXCCCWXY999的个人博客</title>
+    <title>HashMap底层实现原理 - ZZZXXXCCCWXY999的个人博客</title>
 
     <!-- Tachyons Core CSS -->
     <link rel="stylesheet" href="https://unpkg.com/tachyons/css/tachyons.min.css">
@@ -126,8 +126,8 @@
     <!-- Title -->
     <div class="w-100 mw8 center vh-40 dt">
         <div class="dtc v-mid white">
-            <h1 class="f1-l f2-m tc tc-m tl-ns">面试题:谈谈对Spring IOC与DI的理解</h1>
-            <p class="f4 fw3 pab-100px tc tc-m tl-ns">2020-03-09</p>
+            <h1 class="f1-l f2-m tc tc-m tl-ns">HashMap底层实现原理</h1>
+            <p class="f4 fw3 pab-100px tc tc-m tl-ns">2020-03-10</p>
         </div>
     </div>
 
@@ -147,22 +147,18 @@
                     
                         <div class="tags-container-vertical">
                             <div class="tags-sub-container">
-                                <a class="fw3 ph1 dib" href="/tags/java面试/">#java面试</a>
+                                <a class="fw3 ph1 dib" href="/tags/算法/">#算法</a>
                             </div>
                         </div>
                     
 
                     <!-- Main Post Content -->
-                    <h1 id="框架面试题-谈谈对Spring-IOC与DI的理解"><a href="#框架面试题-谈谈对Spring-IOC与DI的理解" class="headerlink" title="框架面试题:谈谈对Spring IOC与DI的理解"></a>框架面试题:谈谈对Spring IOC与DI的理解</h1><p>IOC是一种叫做“控制反转”的设计思想。</p>
-<p>1、较浅的层次——从名字上解析<br>“控制”就是指对 对象的创建、维护、销毁等生命周期的控制，这个过程一般是由我们的程序去主动控制的，如使用new关键字去创建一个对象（创建），在使用过程中保持引用（维护），在失去全部引用后由GC去回收对象（销毁）。<br>“反转”就是指对 对象的创建、维护、销毁等生命周期的控制由程序控制改为由IOC容器控制，需要某个对象时就直接通过名字去IOC容器中获取。</p>
-<p>2、更深的层次——提到DI，依赖注入，是IOC的一种重要实现<br>一个对象的创建往往会涉及到其他对象的创建，比如一个对象A的成员变量持有着另一个对象B的引用，这就是依赖，A依赖于B。IOC机制既然负责了对象的创建，那么这个依赖关系也就必须由IOC容器负责起来。负责的方式就是DI——依赖注入，通过将依赖关系写入配置文件，然后在创建有依赖关系的对象时，由IOC容器注入依赖的对象，如在创建A时，检查到有依赖关系，IOC容器就把A依赖的对象B创建后注入到A中（组装，通过反射机制实现），然后把A返回给对象请求者，完成工作。</p>
-<p>3、IOC的意义何在？<br>IOC并没有实现更多的功能，但它的存在使我们不需要很多代码、不需要考虑对象间复杂的耦合关系就能从IOC容器中获取合适的对象，而且提供了对 对象的可靠的管理，极大地降低了开发的复杂性。</p>
-
+                    
                     
                     <!-- Tags Bottom -->
                     
                         <div class="tags-container-bottom">
-                            <i class="fa fa-tag pr3 text-main-color"></i><a class="fw3 ph1 dib" href="/tags/java面试/">#java面试</a>
+                            <i class="fa fa-tag pr3 text-main-color"></i><a class="fw3 ph1 dib" href="/tags/算法/">#算法</a>
                         </div>
                     
 
@@ -196,7 +192,7 @@
     <h3>分类</h3>
     
         <p>
-            <a href="/categories/java/">java</a>
+            <a href="/categories/数据结构-HashMap/">-&#34;数据结构&#34; -&#34;HashMap&#34;</a>
         </p>
     
 </div>
