@@ -20,7 +20,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="Codeforces-1248BGrow The Tree题解"/>
+        <meta property="og:title" content="红黑树的原理及其底层实现"/>
     
 
     <!--Open Graph Description-->
@@ -44,7 +44,7 @@
 
     <!-- Title -->
     
-    <title>Codeforces-1248BGrow The Tree题解 - ZZZXXXCCCWXY999的个人博客</title>
+    <title>红黑树的原理及其底层实现 - ZZZXXXCCCWXY999的个人博客</title>
 
     <!-- Tachyons Core CSS -->
     <link rel="stylesheet" href="https://unpkg.com/tachyons/css/tachyons.min.css">
@@ -126,8 +126,8 @@
     <!-- Title -->
     <div class="w-100 mw8 center vh-40 dt">
         <div class="dtc v-mid white">
-            <h1 class="f1-l f2-m tc tc-m tl-ns">Codeforces-1248BGrow The Tree题解</h1>
-            <p class="f4 fw3 pab-100px tc tc-m tl-ns">2020-03-06</p>
+            <h1 class="f1-l f2-m tc tc-m tl-ns">红黑树的原理及其底层实现</h1>
+            <p class="f4 fw3 pab-100px tc tc-m tl-ns">2020-03-10</p>
         </div>
     </div>
 
@@ -153,14 +153,14 @@
                     
 
                     <!-- Main Post Content -->
-                    <p><a href="http://codeforces.com/contest/1248/problem/B" target="_blank" rel="noopener">题目链接</a></p>
-<h2 id="题目大意："><a href="#题目大意：" class="headerlink" title="题目大意："></a>题目大意：</h2><p>给出一组线段（题目中叫树枝）的长度，制作成一条折线，使原点到这条折线另一端的距离<br><img src="https://img-blog.csdnimg.cn/20191104194715636.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjA4MDE2OQ==,size_16,color_FFFFFF,t_70" alt="原点到这条折线另一端的距离"></p>
-<h2 id="输入："><a href="#输入：" class="headerlink" title="输入："></a>输入：</h2><p>第一行输入一个整数n表示线段的数量<br>第二行输入n个数代表a<sub>1</sub>,a<sub>2</sub>,a<sub>3</sub>…a<sub>n</sub>,</p>
-<h2 id="输出："><a href="#输出：" class="headerlink" title="输出："></a>输出：</h2><p>输出一个整数表示原点到这条折线另一端距离的平方</p>
-<h2 id="数据范围："><a href="#数据范围：" class="headerlink" title="数据范围："></a>数据范围：</h2><p>n(1&lt;=n&lt;=100000) a<sub>n</sub>(1&lt;=a<sub>n</sub>&lt;=10000)</p>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>我们可以通过线段的平移把折线转化为一个长方形求长和宽平方和的最大值，我们知道长和宽的差越大平方和越大。<br>简单推导如下：<br>假如我们有个长a+宽b=10的长方形，它的对角线长度平方的公式为y=2x^2^-20x+100，图像如下。<img src="https://img-blog.csdnimg.cn/20191104195449182.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjA4MDE2OQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>由于线段原来是折线形摆放的，长和宽需要交替摆放所以我们只能将所有的线段分为两堆，较长的放一堆较短的放另一堆。然后较长的加在水平的线上，较短的加在垂直的线上，这样求出来的距离是最长的</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">    public <span class="keyword">static</span> <span class="keyword">void</span> main(<span class="built_in">String</span>[] args) &#123;</span><br><span class="line">        Scanner scanner = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">        Long standard = <span class="number">0</span>L;</span><br><span class="line">        Long vertical = <span class="number">0</span>L;</span><br><span class="line">        int n = scanner.nextInt();</span><br><span class="line">        int a[] = <span class="keyword">new</span> int[n];</span><br><span class="line">        <span class="keyword">for</span> (int i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">            a[i] = scanner.nextInt();</span><br><span class="line">        Arrays.sort(a);</span><br><span class="line">        <span class="keyword">for</span> (int i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (i &lt; n / <span class="number">2</span>)</span><br><span class="line">                vertical += a[i];</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                standard += a[i];</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(standard * standard + vertical * vertical);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+                    <h1 id="红黑树的原理及其底层实现"><a href="#红黑树的原理及其底层实现" class="headerlink" title="红黑树的原理及其底层实现"></a>红黑树的原理及其底层实现</h1><h4 id="红黑树的特点："><a href="#红黑树的特点：" class="headerlink" title="红黑树的特点："></a>红黑树的特点：</h4><p>1.每个节点不是红色就是黑色<br>2.不可能有连在一起的红色节点<br>3.根结点都是黑色<br>4.每个红色节点的子节点都是黑色<br>5.叶子节点都是黑色的空节点<br>6.从任意节点到其每个叶子的所有路径都包含相同的黑色节点。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RedBlackTree</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">boolean</span> RED = <span class="keyword">false</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">boolean</span> BLACK = <span class="keyword">true</span>;</span><br><span class="line">    Object key;</span><br><span class="line">    Object value;</span><br><span class="line">    RedBlackTree left;</span><br><span class="line">    RedBlackTree right;</span><br><span class="line">    RedBlackTree patent;</span><br><span class="line">    <span class="keyword">boolean</span> color=BLACK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<h4 id="变换规则"><a href="#变换规则" class="headerlink" title="变换规则"></a>变换规则</h4><h5 id="父节点是黑色，插入新节点为红色。解决办法：直接插入就可以了"><a href="#父节点是黑色，插入新节点为红色。解决办法：直接插入就可以了" class="headerlink" title="父节点是黑色，插入新节点为红色。解决办法：直接插入就可以了"></a>父节点是黑色，插入新节点为红色。解决办法：直接插入就可以了</h5><h5 id="父节点为红色，叔叔节点为红色。解决办法：变色"><a href="#父节点为红色，叔叔节点为红色。解决办法：变色" class="headerlink" title="父节点为红色，叔叔节点为红色。解决办法：变色"></a>父节点为红色，叔叔节点为红色。解决办法：变色</h5><p>1.父节点变为黑色。<br>2.叔叔节点变为黑色。<br>3.祖父接待您变为红色。<br>4.吧指针定义到祖父节点设为当前要操作的节点</p>
+<h5 id="父节点为红色，叔叔节点为黑色，且当前节点是右子树。解决办法：左旋"><a href="#父节点为红色，叔叔节点为黑色，且当前节点是右子树。解决办法：左旋" class="headerlink" title="父节点为红色，叔叔节点为黑色，且当前节点是右子树。解决办法：左旋"></a>父节点为红色，叔叔节点为黑色，且当前节点是右子树。解决办法：左旋</h5><p><img src="https://upload-images.jianshu.io/upload_images/10998555-3910299ca41dc447.gif?imageMogr2/auto-orient/strip%7CimageView2/2/w/329/format/webp" alt="rotateLeft"></p>
+<p>1.把父节点变为黑色<br>2.把祖父节点变为红色<br>3.以祖父节点旋转</p>
+<h5 id="父节点为红色，叔叔节点为黑色，且当前节点是左子树。解决办法：左旋"><a href="#父节点为红色，叔叔节点为黑色，且当前节点是左子树。解决办法：左旋" class="headerlink" title="父节点为红色，叔叔节点为黑色，且当前节点是左子树。解决办法：左旋"></a>父节点为红色，叔叔节点为黑色，且当前节点是左子树。解决办法：左旋</h5><p><img src="https://upload-images.jianshu.io/upload_images/10998555-481ce3058bc6da6f.gif?imageMogr2/auto-orient/strip%7CimageView2/2/w/301/format/webp" alt="rotateRight"></p>
+<p>1.把父节点变为黑色<br>2.把祖父节点变为红色<br>3.以祖父节点旋转</p>
 
                     
                     <!-- Tags Bottom -->
@@ -200,7 +200,11 @@
     <h3>分类</h3>
     
         <p>
-            <a href="/categories/java/">java</a>
+            <a href="/categories/数据结构/">数据结构</a>
+        </p>
+    
+        <p>
+            <a href="/categories/数据结构/红黑树/">红黑树</a>
         </p>
     
 </div>
