@@ -20,7 +20,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="Codeforces-1248AInteger Points题解"/>
+        <meta property="og:title" content="Spring初始化的步骤"/>
     
 
     <!--Open Graph Description-->
@@ -44,7 +44,7 @@
 
     <!-- Title -->
     
-    <title>Codeforces-1248AInteger Points题解 - ZZZXXXCCCWXY999的个人博客</title>
+    <title>Spring初始化的步骤 - ZZZXXXCCCWXY999的个人博客</title>
 
     <!-- Tachyons Core CSS -->
     <link rel="stylesheet" href="https://unpkg.com/tachyons/css/tachyons.min.css">
@@ -126,8 +126,8 @@
     <!-- Title -->
     <div class="w-100 mw8 center vh-40 dt">
         <div class="dtc v-mid white">
-            <h1 class="f1-l f2-m tc tc-m tl-ns">Codeforces-1248AInteger Points题解</h1>
-            <p class="f4 fw3 pab-100px tc tc-m tl-ns">2020-03-06</p>
+            <h1 class="f1-l f2-m tc tc-m tl-ns">Spring初始化的步骤</h1>
+            <p class="f4 fw3 pab-100px tc tc-m tl-ns">2020-03-11</p>
         </div>
     </div>
 
@@ -145,29 +145,28 @@
                 <div class="fl w-100 w-70-l mw7 left fw3 lh-copy pr4-ns pr0-m post-content">
                     <!-- Tags Vertical -->
                     
-                        <div class="tags-container-vertical">
-                            <div class="tags-sub-container">
-                                <a class="fw3 ph1 dib" href="/tags/算法/">#算法</a>
-                            </div>
-                        </div>
-                    
 
                     <!-- Main Post Content -->
-                    <p><a href="http://codeforces.com/contest/1248/problem/A" target="_blank" rel="noopener">题目链接</a></p>
-<h2 id="译文大意："><a href="#译文大意：" class="headerlink" title="译文大意："></a>译文大意：</h2><p>已知有n条形如y = x + pi（i = 1,2,3，…，n）的直线和m条形如y = -x + qi（i = 1,2,3，…，m ）的直线，问有几个横纵坐标坐标整数的交点，输出个数。</p>
-<h2 id="输入："><a href="#输入：" class="headerlink" title="输入："></a>输入：</h2><p>第一行输入一个整数t表示有t组测试数据每一组测试数据的第一行输入一个整数n表示有n条形如y = x + pi的直线第二行输入n个数代表p1，p2 ，p3，…，pn第三行输入一个整数m表示有m条形如y = -x + qi的直线第四行输入m个数代表q1，q2，q3，…，qm</p>
-<h2 id="输出："><a href="#输出：" class="headerlink" title="输出："></a>输出：</h2><p>每组数据输出一个数字表示横纵坐标合并整数的交点个数。</p>
-<h2 id="数据范围："><a href="#数据范围：" class="headerlink" title="数据范围："></a>数据范围：</h2><p>t（1 &lt;= t &lt;= 1000）n（1 &lt;= n &lt;= 10 ^ 5 ^）pi（1 &lt;pi &lt;= 10 ^ 9 ^）m（1 &lt;= m &lt;= 10 ^ 5 ^）qi（ 1 &lt;=气&lt;= 10 ^ 9 ^）</p>
-<h2 id="想法"><a href="#想法" class="headerlink" title="想法"></a>想法</h2><p>我们来推算一下交点的方程x + pi = -x + qi 2x = qi- pi x =（qi- pi）/ 2我们会发现如果（pi-qi）是个偶数，那么这个交点的横纵坐标就都是整体也就是（pi-qi）％2 \ == 0，我们还可以推算出（pi + qi）％2 \ == 0，那么我们只需要求出两条直线的纵截距相加是奇数还是偶数。我们知道奇数+奇数=偶数，奇数+偶数=奇数，偶数+偶数=偶数。所以我们只要求出pi和qi分别偶数个数相乘。</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">    public <span class="keyword">static</span> <span class="keyword">void</span> <span class="function"><span class="keyword">function</span>(<span class="params">long a_odd,long a_even,long b_odd,long b_even</span>)</span>&#123;</span><br><span class="line">        long sum=a_odd*b_odd+a_even*b_even;</span><br><span class="line">        System.out.println(sum);</span><br><span class="line">    &#125;</span><br><span class="line">    public <span class="keyword">static</span> <span class="keyword">void</span> main(<span class="built_in">String</span>[] args) &#123;</span><br><span class="line">        Scanner scanner=<span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">        long t;</span><br><span class="line">        long n,m;</span><br><span class="line">        t=scanner.nextLong();</span><br><span class="line">        <span class="keyword">for</span> (long i=<span class="number">0</span>;i&lt;t;i++)&#123;</span><br><span class="line">            long a_odd=<span class="number">0</span>;</span><br><span class="line">            long a_even=<span class="number">0</span>;</span><br><span class="line">            long b_odd=<span class="number">0</span>;</span><br><span class="line">            long b_even=<span class="number">0</span>;</span><br><span class="line">            n=scanner.nextLong();</span><br><span class="line">            <span class="keyword">for</span> (long j=<span class="number">0</span>;j&lt;n;j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(scanner.nextLong()%<span class="number">2</span>==<span class="number">0</span>)a_even++;</span><br><span class="line">                <span class="keyword">else</span> a_odd++;</span><br><span class="line">            &#125;</span><br><span class="line">            m=scanner.nextLong();</span><br><span class="line">            <span class="keyword">for</span> (long j=<span class="number">0</span>;j&lt;m;j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(scanner.nextLong()%<span class="number">2</span>==<span class="number">0</span>)b_even++;</span><br><span class="line">                <span class="keyword">else</span> b_odd++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="function"><span class="keyword">function</span>(<span class="params">a_odd,a_even,b_odd,b_even</span>);</span></span><br><span class="line"><span class="function">        &#125;</span></span><br><span class="line"><span class="function">    &#125;</span></span><br><span class="line"><span class="function">&#125;</span></span><br></pre></td></tr></table></figure>
-
+                    <h1 id="Spring初始化的步骤"><a href="#Spring初始化的步骤" class="headerlink" title="Spring初始化的步骤"></a>Spring初始化的步骤</h1><h4 id="一、Spring-的初始化说到底就是Ioc容器初始化。"><a href="#一、Spring-的初始化说到底就是Ioc容器初始化。" class="headerlink" title="一、Spring 的初始化说到底就是Ioc容器初始化。"></a>一、Spring 的初始化说到底就是Ioc容器初始化。</h4><h4 id="二、Ioc容器的初始化的几个重要步骤"><a href="#二、Ioc容器的初始化的几个重要步骤" class="headerlink" title="二、Ioc容器的初始化的几个重要步骤"></a>二、Ioc容器的初始化的几个重要步骤</h4><h5 id="2-1、定位"><a href="#2-1、定位" class="headerlink" title="2. 1、定位"></a>2. 1、定位</h5><p>2.1.1所谓的定位就是定位文件资源，如我们常配置的classPathApplicationContext.properties文件，FileSystem文件。</p>
+<p>2.1.2在spring 中是通过Reader进行定位配置文件</p>
+<p>// 根据 Xml 配置文件创建 Resource 资源对象，该对象中包含了 BeanDefinition 的信息<br>ClassPathResource resource = new ClassPathResource(“application-context.xml”);<br>// 创建 DefaultListableBeanFactory<br>DefaultListableBeanFactory factory = new DefaultListableBeanFactory();<br>//创建 XmlBeanDefinitionReader 读取器，用于载入 BeanDefinition。<br>// 之所以需要 BeanFactory 作为参数，是因为会将读取的信息回调配置给 factory<br>XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader(factory);<br>// XmlBeanDefinitionReader 执行载入 BeanDefinition 的方法，最后会完成 Bean 的载入和注册。<br>// 完成后 Bean 就成功的放置到 IOC 容器当中，以后我们就可以从中取得 Bean 来使用<br>reader.loadBeanDefinitions(resource);</p>
+<p>2.1.3 在Spring中加载xml文件的配置文件的方式主要有如下几种：<br>1、XmlBeanFactory </p>
+<p>2、ClassPathXmlApplicationContext </p>
+<p>3、FileSystemXmlApplicationContext </p>
+<p>4、XmlWebApplicationContext </p>
+<p>2、加载</p>
+<p>2.2 对配置文件的加载，将配置好的文件进行加载并根据配置的原理以及规则对配置进行解析，如各种Bean之间的关系描述（里面包含了各种设计模式）</p>
+<p>3、注册</p>
+<p>把我们加载的配置文件（包含了各种Bean之间的关系）转化为具体的Bean文件，通过反射(reflect)，工厂模式等方法进行重新的生产(new 出来)，形成一个完整的由Bean主导(干事)的容器（框架）</p>
+<p>4、注入（注入不是Ioc容器完成的）</p>
+<p>注入的三种方式：</p>
+<p>4.1.set 注入     </p>
+<p>4.2.构造器注入</p>
+<p>4.3.接口注入</p>
+<p>5.注入之后我们就可以更具我们定义的关系进行各种操作了（CRUD）</p>
 
                     
                     <!-- Tags Bottom -->
-                    
-                        <div class="tags-container-bottom">
-                            <i class="fa fa-tag pr3 text-main-color"></i><a class="fw3 ph1 dib" href="/tags/算法/">#算法</a>
-                        </div>
                     
 
                     <!-- Comments -->
@@ -195,18 +194,6 @@
                     <hr class="dn-l mw4 black-50 mt5" />
                     
                     <!-- Widget 2: Categories -->
-                    
-                        <div class="mt5 tc tl-l">
-    <h3>分类</h3>
-    
-        <p>
-            <a href="/categories/java/">java</a>
-        </p>
-    
-</div>
-
-
-                        <hr class="dn-l mw4 black-50 mt5" />
                     
 
                     <!-- Widget 3: Recent Posts -->
