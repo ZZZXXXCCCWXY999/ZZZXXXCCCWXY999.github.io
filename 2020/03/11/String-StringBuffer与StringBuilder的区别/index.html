@@ -145,11 +145,44 @@
                 <div class="fl w-100 w-70-l mw7 left fw3 lh-copy pr4-ns pr0-m post-content">
                     <!-- Tags Vertical -->
                     
+                        <div class="tags-container-vertical">
+                            <div class="tags-sub-container">
+                                <a class="fw3 ph1 dib" href="/tags/String/">#String</a> <a class="fw3 ph1 dib" href="/tags/java/">#java</a>
+                            </div>
+                        </div>
+                    
 
                     <!-- Main Post Content -->
-                    
+                    <h3 id="三者在执行速度方面的比较："><a href="#三者在执行速度方面的比较：" class="headerlink" title="三者在执行速度方面的比较："></a>三者在执行速度方面的比较：</h3><p>StringBuilder &gt; StringBuffer &gt; String</p>
+<h3 id="String-lt-StringBuffer-lt-StringBuilder-的原因"><a href="#String-lt-StringBuffer-lt-StringBuilder-的原因" class="headerlink" title="String &lt; StringBuffer &lt; StringBuilder 的原因"></a>String &lt; StringBuffer &lt; StringBuilder 的原因</h3><p>String：字符串常量</p>
+<p>StringBuffer：线程安全的字符串变量</p>
+<p>StringBuilder：线程不安全的字符串变量</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String s = <span class="string">"abcd"</span>;</span><br><span class="line">s = s+<span class="number">1</span>;</span><br><span class="line">System.out.print(s);<span class="comment">// result : abcd1</span></span><br></pre></td></tr></table></figure>
+<p>我们表面上看起来改变了String型的变量s的，实际上我们没有改变，而是创建了一个新的String类型的常量</p>
+<p>其实这是一种欺骗，JVM是这样解析这段代码的：首先创建对象s，赋予一个abcd，然后再创建一个新的对象s用来执行第二行代码，也就是说我们之前对象s并没有变化，所以我们说String类型是不可改变的对象了。由于这种机制，每当用String操作字符串时，实际上是在不断的创建新的对象，而原来的对象就会变为垃圾被GC回收掉，可想而知这样执行效率会有多底。</p>
+<p>而StringBuffer与StringBuilder就不一样了，他们是字符串变量，是可改变的对象，每当我们用它们对字符串做操作时，实际上是在本对象上操作的，这样就不会像String一样创建一些额外的对象进行操作了，当然速度就快了。</p>
+<h4 id="一个特殊的例子："><a href="#一个特殊的例子：" class="headerlink" title="一个特殊的例子："></a>一个特殊的例子：</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String str = <span class="string">"This is only a"</span> + <span class="string">" simple"</span> + <span class="string">" test"</span>;</span><br><span class="line">StringBuffer builder = <span class="keyword">new</span> StringBuilder(<span class="string">"This is only a"</span>).append(<span class="string">" simple"</span>).append(<span class="string">" test"</span>);</span><br></pre></td></tr></table></figure>
+
+<p>你会很惊讶的发现，生成str对象的速度简直太快了，而这个时候StringBuffer居然速度上根本一点都不占优势。其实这是JVM的一个把戏，实际上：</p>
+<p>其实就是：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String str = <span class="string">"This is only a"</span> + <span class="string">" simple"</span> + <span class="string">"test"</span>;</span><br></pre></td></tr></table></figure>
+
+<p>所以不需要太多的时间了。但大家这里要注意的是，如果你的字符串是来自另外的String对象的话，速度就没那么快了，譬如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String str2 = <span class="string">"This is only a"</span>;</span><br><span class="line">String str3 = <span class="string">" simple"</span>;</span><br><span class="line">String str4 = <span class="string">" test"</span>;</span><br><span class="line">String str1 = str2 +str3 + str4;</span><br></pre></td></tr></table></figure>
+
+<p>这时候JVM会规规矩矩的按照原来的方式去做。</p>
+<h3 id="是否线程安全"><a href="#是否线程安全" class="headerlink" title="是否线程安全"></a>是否线程安全</h3><p>StringBuilder与 StringBuffer<br>StringBuilder：线程非安全的<br>StringBuffer：线程安全的<br>String：线程安全（String是不可变类，String对象的状态是不变的，所以线程安全。所有不可变类都是线程安全的，但是线程安全的类并不一定是不可变类。比如StringBuffer，是可变类，但它的线程安全是靠锁来保证的）<br>StringBuffer对方法加了同步锁或者对调用的方法加了同步锁，所以是线程安全的。看如下源码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> StringBuffer <span class="title">reverse</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.reverse();</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span> ;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">indexOf</span><span class="params">(String str)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span>  indexOf(str, <span class="number">0</span>); <span class="comment">//存在 public synchronized int indexOf(String str, int fromIndex) 方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>StringBuilder并没有对方法进行加同步锁，所以是非线程安全的 。</p>
+<p>当字符串缓冲区被多个线程使用时，JVM不能保证StringBuilder的操作是安全的，虽然它的速度最快，但是StringBuffer是可以保证操作正确。当然大多数情况下我们是在单线程下进行的操作，所以大多数情况下是建议用StringBuilder而不用StringBuffer。</p>
+<h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h3><p>操作少量的数据选String<br>单线程且大量数据选StringBuilder<br>多线程且大量数据选StringBuffer</p>
+
                     
                     <!-- Tags Bottom -->
+                    
+                        <div class="tags-container-bottom">
+                            <i class="fa fa-tag pr3 text-main-color"></i><a class="fw3 ph1 dib" href="/tags/String/">#String</a> <a class="fw3 ph1 dib" href="/tags/java/">#java</a>
+                        </div>
                     
 
                     <!-- Comments -->
@@ -178,10 +211,26 @@
                     
                     <!-- Widget 2: Categories -->
                     
+                        <div class="mt5 tc tl-l">
+    <h3>分类</h3>
+    
+        <p>
+            <a href="/categories/java面试/">java面试</a>
+        </p>
+    
+</div>
+
+
+                        <hr class="dn-l mw4 black-50 mt5" />
+                    
 
                     <!-- Widget 3: Recent Posts -->
                     <div class="mt5 tc tl-l">
     <h3>近期文章</h3>
+    
+        <p>
+            <a href="/2020/03/14/String-s-abc-%E5%92%8C-String-s-new-String-abc-%E7%9A%84%E5%8C%BA%E5%88%AB/">String s=abc 和 String s=new String(abc)的区别</a>
+        </p>
     
         <p>
             <a href="/2020/03/11/%E5%B0%8F%E7%B1%B3java%E5%AE%9E%E4%B9%A0%E9%9D%A2%E7%BB%8F/">小米java实习面经</a>
@@ -197,10 +246,6 @@
     
         <p>
             <a href="/2020/03/11/String-StringBuffer%E4%B8%8EStringBuilder%E7%9A%84%E5%8C%BA%E5%88%AB/">String,StringBuffer与StringBuilder的区别</a>
-        </p>
-    
-        <p>
-            <a href="/2020/03/10/HashMap%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/">HashMap底层实现原理</a>
         </p>
     
 </div>

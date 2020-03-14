@@ -20,7 +20,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="关于三大IO的理解:AIO,BIO,NIO"/>
+        <meta property="og:title" content="String s=abc 和 String s=new String(abc)的区别"/>
     
 
     <!--Open Graph Description-->
@@ -44,7 +44,7 @@
 
     <!-- Title -->
     
-    <title>关于三大IO的理解:AIO,BIO,NIO - ZZZXXXCCCWXY999的个人博客</title>
+    <title>String s=abc 和 String s=new String(abc)的区别 - ZZZXXXCCCWXY999的个人博客</title>
 
     <!-- Tachyons Core CSS -->
     <link rel="stylesheet" href="https://unpkg.com/tachyons/css/tachyons.min.css">
@@ -126,8 +126,8 @@
     <!-- Title -->
     <div class="w-100 mw8 center vh-40 dt">
         <div class="dtc v-mid white">
-            <h1 class="f1-l f2-m tc tc-m tl-ns">关于三大IO的理解:AIO,BIO,NIO</h1>
-            <p class="f4 fw3 pab-100px tc tc-m tl-ns">2020-03-11</p>
+            <h1 class="f1-l f2-m tc tc-m tl-ns">String s=abc 和 String s=new String(abc)的区别</h1>
+            <p class="f4 fw3 pab-100px tc tc-m tl-ns">2020-03-14</p>
         </div>
     </div>
 
@@ -147,18 +147,35 @@
                     
                         <div class="tags-container-vertical">
                             <div class="tags-sub-container">
-                                <a class="fw3 ph1 dib" href="/tags/java/">#java</a> <a class="fw3 ph1 dib" href="/tags/IO/">#IO</a>
+                                <a class="fw3 ph1 dib" href="/tags/String/">#String</a> <a class="fw3 ph1 dib" href="/tags/java/">#java</a>
                             </div>
                         </div>
                     
 
                     <!-- Main Post Content -->
-                    
+                    <h2 id="String的特性"><a href="#String的特性" class="headerlink" title="String的特性"></a>String的特性</h2><p>1、String类是final的，不可被继承。<br>2、String类是的本质是字符数组char[], 并且其值不可改变。<br>3、Java运行时会维护一个String Pool（String池），JavaDoc翻译很模糊“字符串缓冲区”。String池用来存放运行时中产生的各种字符串，并且池中的字符串的内容不重复。而一般对象不存在这个缓冲池，并且创建的对象仅仅存在于方法的堆栈区。</p>
+<h4 id="String-str-new-String-“abc”-紧接着这段代码之后的往往是这个问题，那就是这行代码究竟创建了几个String对象呢？"><a href="#String-str-new-String-“abc”-紧接着这段代码之后的往往是这个问题，那就是这行代码究竟创建了几个String对象呢？" class="headerlink" title="String str=new String(“abc”); 紧接着这段代码之后的往往是这个问题，那就是这行代码究竟创建了几个String对象呢？"></a>String str=new String(“abc”); 紧接着这段代码之后的往往是这个问题，那就是这行代码究竟创建了几个String对象呢？</h4><h4 id="相信大家对这道题并不陌生，答案也是众所周知的，1个或2个。"><a href="#相信大家对这道题并不陌生，答案也是众所周知的，1个或2个。" class="headerlink" title="相信大家对这道题并不陌生，答案也是众所周知的，1个或2个。"></a>相信大家对这道题并不陌生，答案也是众所周知的，1个或2个。</h4><p>1 首先在堆中（不是常量池）创建一个指定的对象”abc”，并让str引用指向该对象<br>2 在字符串常量池中查看，是否存在内容为”abc”字符串对象<br>3 若存在，则将new出来的字符串对象与字符串常量池中的对象联系起来<br>4 若不存在，则在字符串常量池中创建一个内容为”abc”的字符串对象，并将堆中的对象与之联系起来</p>
+<h2 id="接下来我们就从这道题展开，一起回顾一下与创建String对象相关的一些JAVA知识。"><a href="#接下来我们就从这道题展开，一起回顾一下与创建String对象相关的一些JAVA知识。" class="headerlink" title="接下来我们就从这道题展开，一起回顾一下与创建String对象相关的一些JAVA知识。"></a>接下来我们就从这道题展开，一起回顾一下与创建String对象相关的一些JAVA知识。</h2><p>我们可以把上面这行代码分成String str、=、”abc”和new String()四部分来看待。String str只是定义了一个名为str的String类型的变量，因此它并没有创建对象；=是对变量str进行初始化，将某个对象的引用赋值给它，显然也没有创建对象；现在只剩下new String(“abc”)了。那么，new String(“abc”)为什么又能被看成”abc”和new String()呢？</p>
+<p>我们来看一下被我们调用了的String的构造器：<br>public String(String original) { //other code … } 大家都知道，我们常用的创建一个类的实例（对象）的方法有以下两种:</p>
+<h4 id="一、使用new创建对象。"><a href="#一、使用new创建对象。" class="headerlink" title="一、使用new创建对象。"></a>一、使用new创建对象。</h4><h4 id="二、调用Class类的newInstance方法，利用反射机制创建对象。"><a href="#二、调用Class类的newInstance方法，利用反射机制创建对象。" class="headerlink" title="二、调用Class类的newInstance方法，利用反射机制创建对象。"></a>二、调用Class类的newInstance方法，利用反射机制创建对象。</h4><p>我们正是使用new调用了String类的上面那个构造器方法创建了一个对象，并将它的引用赋值给了str变量。同时我们注意到，被调用的构造器方法接受的参数也是一个String对象，这个对象正是”abc”。由此我们又要引入另外一种创建String对象的方式的讨论——引号内包含文本。这种方式是String特有的，并且它与new的方式存在很大区别。</p>
+<p>String str=”abc”;<br>毫无疑问，这行代码创建了一个String对象。 </p>
+<p>String a=”abc”; String b=”abc”; 那这里呢？<br>答案还是一个。 </p>
+<p>String a=”ab”+”cd”; 再看看这里呢？<br>通过编译器优化后，得到的效果是String a=”abcd”<br>此时，如果字符串常量池中存在abcd，则该语句并不会创建对象，只是讲字符串常量池中的引用返回而已。<br>如果字符串常量池中不存在abcd，则会创建并放入字符串常量池，并返回引用，此时会有一个对象进行创建。</p>
+<p>说到这里，我们就需要引入对字符串池相关知识的回顾了。<br>在JAVA虚拟机（JVM）中存在着一个字符串池，其中保存着很多String对象，并且可以被共享使用，因此它提高了效率。由于String类是final的，它的值一经创建就不可改变，因此我们不用担心String对象共享而带来程序的混乱。字符串池由String类维护，我们可以调用intern()方法来访问字符串池。 </p>
+<p>我们再回头看看String a=”abc”，这行代码被执行的时候，JAVA虚拟机首先在字符串池中查找是否已经存在了值为”abc”的这么一个对象，它的判断依据是String类equals(Object obj)方法的返回值。如果有，则不再创建新的对象，将使用串池里原来的那个内存，直接返回已存在对象的引用，而不会重新分配内存；如果没有，则先创建这个对象，然后把它加入到字符串池中，再将它的引用返回。</p>
+<p>而如果用String s=new String(“abc”)，不管串池里有没有”abc”，它都会在堆中重新分配一块内存，定义一个新的对象。<br>因此我们提倡大家用引号包含文本的方式来创建String对象以提高效率，实际上这也是我们在编程中常采用的。</p>
+<p>再看下个例子：</p>
+<p>String s=”java”+”blog”;//直接将javablog对象放入字符串池中。<br>System.out.println(s==”javablog”);//结果是true;</p>
+<p>String str1=”java”;//指向字符串池<br>String str2=”blog”;//指向字符串池<br>String s = str1+str2; // +运算符会在堆中建立起两个String对象，这两个对象的值分别是“java”,”blog”,也就是说从字符串常量池中复制这两个值，然后再堆中创建两个对象。然后再建立对象s, 然后将“javablog”的堆地址赋给s. 这句话共创建了3个String对象。<br>System.out.println(s==”javablog”);//因为内存地址不同，结果是false;</p>
+<p>String s=str1+”blog”;//不放在字符串池中，而是在堆中分分配。<br>System.out.println(s==”javablog”);//结果是false;</p>
+<p>JVM对形如String str=”java”+”blog”;根据编译器合并已知量的优化功能，在池中开辟一块空间，存放合并后的String常量”javablog”。而String s=str1+str2;是在运行时候才能知道的，也就是说str1+str2是在堆里创建的所以结果为false了。</p>
+<p>总之，创建字符串有两种方式：两种内存区域(pool,heap)<br>1.””创建的字符串在字符串池中。<br>2.new 创建字符串时，首先查看池中是否有相同的字符串，如果有则拷贝一份放到堆中，然后返回堆中的地址；如果池中没有则在堆中创建一份，然后返回堆中的地址，<br>3.在对字符串赋值时，如果右操作数含有一个或一个以上的字符串引用时，则在堆中再建立一个字符串对象，返回引用。如：String s= str1+”blog”;</p>
+
                     
                     <!-- Tags Bottom -->
                     
                         <div class="tags-container-bottom">
-                            <i class="fa fa-tag pr3 text-main-color"></i><a class="fw3 ph1 dib" href="/tags/java/">#java</a> <a class="fw3 ph1 dib" href="/tags/IO/">#IO</a>
+                            <i class="fa fa-tag pr3 text-main-color"></i><a class="fw3 ph1 dib" href="/tags/String/">#String</a> <a class="fw3 ph1 dib" href="/tags/java/">#java</a>
                         </div>
                     
 
